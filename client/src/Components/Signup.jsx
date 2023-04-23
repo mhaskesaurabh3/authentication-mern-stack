@@ -4,17 +4,19 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useState } from 'react';
 
-const Login = () => {
+const Signup = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const userLogin = async (e) => {
+  const registerUser = async (e) => {
     console.log('button clicked');
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:1337/api/login',
+        'http://localhost:1337/api/register',
         {
+          name: name,
           email: email,
           password: password,
         },
@@ -35,9 +37,24 @@ const Login = () => {
     <div>
       <div className='w-full max-w-xs'>
         <form
-          onSubmit={userLogin}
+          onSubmit={registerUser}
           className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
         >
+          <div className='mb-4'>
+            <label
+              className='block text-gray-700 text-sm font-bold mb-2'
+              htmlFor='username'
+            >
+              Username
+            </label>
+            <input
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              id='username'
+              type='text'
+              placeholder='Username'
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
           <div className='mb-4'>
             <label
               className='block text-gray-700 text-sm font-bold mb-2'
@@ -68,19 +85,12 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className='flex items-center justify-between'>
+          <div className='flex items-center justify-center'>
             <input
               className='bg-blue-500 hover:bg-blue-700 cursor-pointer text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
               type='submit'
               value='Register'
             />
-
-            <a
-              className='inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800'
-              href='#'
-            >
-              Forgot Password?
-            </a>
           </div>
         </form>
       </div>
@@ -88,4 +98,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
