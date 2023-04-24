@@ -1,17 +1,29 @@
-const mongoose = require('mongoose');
+// Import the pool object from the PostgreSQL library
+const pool = require('../db');
 
-const User = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-    quote: { type: String },
-  },
-  {
-    collection: 'user-data',
-  }
+// Define the schema for the users table
+const User = `
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  password TEXT NOT NULL,
+  quote TEXT
 );
+`;
 
-const model = mongoose.model('UserData', User);
+// Create the users table if it doesn't exist yet
+const createUserTable = async () => {
+  const client = await pool.connect();
 
-module.exports = model;
+  try {
+    await client.query(User);
+  } finally {
+    client.release();
+  }
+};
+
+// Export the function to create the users table
+module.exports = {
+  createUserTable,
+};

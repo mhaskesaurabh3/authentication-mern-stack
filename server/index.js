@@ -1,22 +1,29 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const User = require('./models/user.modal');
-const mongoose = require('mongoose');
+const { createUserTable } = require('./models/user.modal');
+const jwt = require('jsonwebtoken');
+const secret = 'reactAuth';
+const bcrypt = require('bcryptjs');
+const pool = require('./db');
 
-mongoose.connect('mongodb://localhost:27017/mern-authentication');
+// Create the users table if it doesn't exist yet
+createUserTable();
 
 app.use(cors());
-
 app.use(express.json());
 
 app.post('/api/register', async (req, res) => {
   try {
-    await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-    });
+    const { name, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert a new user into the users table
+    const queryText =
+      'INSERT INTO users (name, email, password) VALUES ($1, $2, $3)';
+    const values = [name, email, hashedPassword];
+    await pool.query(queryText, values);
+
     res.json({ status: 'ok' });
   } catch (err) {
     res.json({ status: 'error', error: 'Duplicate email' });
@@ -25,12 +32,27 @@ app.post('/api/register', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
   try {
-    const user = await User.findOne({
-      email: req.body.email,
-      password: req.body.password,
-    });
-    if (user) {
-      return res.json({ status: 'ok', user: true });
+    const { email, password } = req.body;
+
+    // Check if the user exists in the users table
+    const queryText = 'SELECT * FROM users WHERE email = $1';
+    const values = [email];
+    const result = await pool.query(queryText, values);
+
+    if (result.rowCount > 0) {
+      const user = result.rows[0];
+      const isValidPassword = await bcrypt.compare(password, user.password);
+
+      if (isValidPassword) {
+        const payload = {
+          name: user.name,
+          email: user.email,
+        };
+        const token = jwt.sign(payload, secret);
+        return res.json({ status: 'ok', token });
+      } else {
+        return res.json({ status: 'error', user: false });
+      }
     } else {
       return res.json({ status: 'error', user: false });
     }
