@@ -3,11 +3,14 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const registerUser = async (e) => {
     console.log('button clicked');
@@ -28,6 +31,12 @@ const Signup = () => {
       );
       let data = await response.data;
       console.log(data);
+      if (data.status === 'ok') {
+        alert('User created successfully');
+        navigate('/login');
+      } else {
+        alert('Please check the details');
+      }
     } catch (error) {
       console.error(error);
     }
@@ -43,15 +52,15 @@ const Signup = () => {
           <div className='mb-4'>
             <label
               className='block text-gray-700 text-sm font-bold mb-2'
-              htmlFor='username'
+              htmlFor='Name'
             >
-              Username
+              Name
             </label>
             <input
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              id='username'
+              id='Name'
               type='text'
-              placeholder='Username'
+              placeholder='Name'
               onChange={(e) => setName(e.target.value)}
             />
           </div>

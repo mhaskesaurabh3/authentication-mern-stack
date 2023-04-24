@@ -3,10 +3,13 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const userLogin = async (e) => {
     console.log('button clicked');
@@ -25,7 +28,14 @@ const Login = () => {
         }
       );
       let data = await response.data;
-      console.log(data);
+      console.log(data.token);
+      if (data.token) {
+        alert('Login successful');
+        localStorage.setItem('token', data.token);
+        navigate('/dashboard');
+      } else {
+        alert('Please check username and password');
+      }
     } catch (error) {
       console.error(error);
     }
