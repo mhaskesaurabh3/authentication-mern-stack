@@ -20,7 +20,7 @@ app.post('/api/register', async (req, res) => {
 
     // Insert a new user into the users table
     const queryText =
-      'INSERT INTO users (name, email, password) VALUES ($1, $2, $3)';
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, COALESCE($3, ''))";
     const values = [name, email, hashedPassword];
     await pool.query(queryText, values);
 
