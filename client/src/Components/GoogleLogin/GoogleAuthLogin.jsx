@@ -13,14 +13,15 @@ const GoogleAuthLogin = () => {
     var decoded = jwt_decode(credentialResponse.credential);
     // console.log(decoded);
     let { name, email } = decoded;
-    const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
-    document.cookie = `isAuthenticated=true; expires=${expirationDate.toUTCString()}; path=/`;
+    console.log('name', name, 'email: ', email);
+
     try {
       const response = await axios.post(
         'http://localhost:1337/api/register',
         {
           name: name,
           email: email,
+          password: '',
         },
         {
           headers: {
@@ -29,9 +30,21 @@ const GoogleAuthLogin = () => {
         }
       );
       let data = await response.data;
+      const { token } = data;
       console.log(data);
-      if (data.status === 'ok') {
+      if (token) {
         alert('User created successfully');
+
+        // Setting authToken value in cookie
+        const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
+        document.cookie = `authToken=${token}; expires=${expirationDate.toUTCString()}; path=/`;
+
+        // Setting isAuthenticated value in cookie
+        const isAuthexpirationDate = new Date(
+          Date.now() + 30 * 24 * 60 * 60 * 1000
+        ); // 30 days from now
+        document.cookie = `isAuthenticated=true; expires=${isAuthexpirationDate.toUTCString()}; path=/`;
+
         navigate('/dashboard');
       } else {
         alert('Please check the details');

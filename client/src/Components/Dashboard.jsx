@@ -6,8 +6,14 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    document.cookie =
-      'isAuthenticated=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+    let isAuthExpire = (document.cookie =
+      'isAuthenticated=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;');
+    let authTokenExpire = (document.cookie =
+      'authToken=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;');
+    if (isAuthExpire && authTokenExpire) {
+      alert('Logout successful');
+      navigate('/login');
+    }
   };
 
   useEffect(() => {
@@ -15,10 +21,14 @@ const Dashboard = () => {
       .split('; ')
       .find((row) => row.startsWith('isAuthenticated='))
       ?.split('=')[1];
+    const authToken = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('authToken='))
+      ?.split('=')[1];
 
     console.log(isAuthenticated);
-    const token = localStorage.getItem('token');
-    if (!token && !isAuthenticated) {
+
+    if (!isAuthenticated && !authToken) {
       navigate('/login');
     }
   }, []);
