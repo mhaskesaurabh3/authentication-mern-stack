@@ -5,6 +5,11 @@ import { googleLogout } from '@react-oauth/google';
 const Dashboard = () => {
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    document.cookie =
+      'isAuthenticated=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+  };
+
   useEffect(() => {
     const isAuthenticated = document.cookie
       .split('; ')
@@ -12,18 +17,15 @@ const Dashboard = () => {
       ?.split('=')[1];
 
     console.log(isAuthenticated);
-    if (!isAuthenticated) {
+    const token = localStorage.getItem('token');
+    if (!token && !isAuthenticated) {
       navigate('/login');
     }
-    const token = localStorage.getItem('token');
-    // if (!token) {
-    //   navigate('/login');
-    // }
   }, []);
 
   return (
     <div>
-      <button onClick={() => googleLogout()}>Logout</button>
+      <button onClick={handleClick}>Logout</button>
     </div>
   );
 };
