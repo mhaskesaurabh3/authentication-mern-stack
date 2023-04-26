@@ -8,6 +8,7 @@ export default {
         'google-but-color': '#DCDBDD',
         'nav-color': '#272E71',
         'side-bar-color': '#F9FAFB',
+        'bg-light-blue': '#D3E3FD',
       },
     },
   },

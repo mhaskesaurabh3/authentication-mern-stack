@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div>
       This is the home page
-      <div className='flex'>
+      <div className='flex justify-center'>
         <Link to='/login'>
           <button>Go to login</button>
         </Link>

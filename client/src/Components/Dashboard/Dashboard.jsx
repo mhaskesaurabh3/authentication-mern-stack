@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
+import Home from '../Pages/Home/Home';
+import Members from '../Pages/Members/Members';
 import SideBar from '../Sidebar/SideBar';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('home');
 
   const handleClick = () => {
     let isAuthExpire = (document.cookie =
@@ -14,6 +17,17 @@ const Dashboard = () => {
     if (isAuthExpire && authTokenExpire) {
       alert('Logout successful');
       navigate('/login');
+    }
+  };
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'home':
+        return <Home />;
+      case 'members':
+        return <Members />;
+      default:
+        return null;
     }
   };
 
@@ -39,9 +53,12 @@ const Dashboard = () => {
       <div className='innoloft-navbar'>
         <Navbar />
       </div>
-      <div className='home w-full '>
-        <div className='side-bar w-1/5'>
-          <SideBar />
+      <div className='home w-full flex'>
+        <div className='side_bar w-1/5'>
+          <SideBar activeTab={activeTab} setActiveTab={setActiveTab} />
+        </div>
+        <div className='data_display_area w-4/5 absolute'>
+          {renderTabContent()}
         </div>
       </div>
     </div>
