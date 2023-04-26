@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
+import SideBar from '../Sidebar/SideBar';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -35,8 +36,14 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Navbar />
-      <button onClick={handleClick}>Logout</button>
+      <div className='innoloft-navbar'>
+        <Navbar />
+      </div>
+      <div className='home w-full '>
+        <div className='side-bar w-1/5'>
+          <SideBar />
+        </div>
+      </div>
     </div>
   );
 };

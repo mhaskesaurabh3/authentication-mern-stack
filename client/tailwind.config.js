@@ -7,6 +7,7 @@ export default {
         'light-grey': '#F5F8FA',
         'google-but-color': '#DCDBDD',
         'nav-color': '#272E71',
+        'side-bar-color': '#F9FAFB',
       },
     },
   },
