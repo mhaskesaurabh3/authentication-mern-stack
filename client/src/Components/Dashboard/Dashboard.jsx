@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { googleLogout } from '@react-oauth/google';
 import Navbar from '../Navbar/Navbar';
 
 const Dashboard = () => {
@@ -36,6 +35,7 @@ const Dashboard = () => {
 
   return (
     <div>
+      <Navbar />
       <button onClick={handleClick}>Logout</button>
     </div>
   );
