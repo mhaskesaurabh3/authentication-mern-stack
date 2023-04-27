@@ -14,7 +14,7 @@ const SideBar = ({ activeTab, setActiveTab }) => {
   return (
     <div>
       <div className='h-screen bg-side-bar-color flex flex-col'>
-        <div className='side_bar_profile'>
+        <div className='side_bar_profile ml-3'>
           <SidebarProfile />
         </div>
         <div className='nav_menu_items mt-8'>

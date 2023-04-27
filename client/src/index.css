@@ -4,6 +4,13 @@
 
 
 
+.badge_image_span {
+  border-radius: 6px 0px 6px 0px;
+}
+
+body {
+  background: #F9FAFB;
+}
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
