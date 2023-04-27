@@ -57,9 +57,7 @@ const Dashboard = () => {
         <div className='side_bar w-1/5'>
           <SideBar activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
-        <div className='data_display_area w-4/5 absolute'>
-          {renderTabContent()}
-        </div>
+        <div className='data_display_area w-4/5 '>{renderTabContent()}</div>
       </div>
     </div>
   );
