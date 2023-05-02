@@ -21,7 +21,7 @@ const ProductDetails = () => {
           </span>
           <span className='w-16 ml-2 mt-1 font-semibold'>Patent</span>
         </div>
-        <div className='product_title  pl-3 h-44 px-7 bg-white'>
+        <div className='product_title  pl-3 h-48 px-7 bg-white'>
           <h2 className='font-medium mb-2 pt-3'>
             Intelligent Finite Elements in Structural mechanics
           </h2>

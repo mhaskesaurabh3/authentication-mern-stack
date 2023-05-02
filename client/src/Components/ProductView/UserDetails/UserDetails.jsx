@@ -1,8 +1,8 @@
 import React from 'react';
 import InoLogo from '../../../assets/inno-Logo.svg';
 import Location from '../../../assets/inno_location.png';
-
 import SidebarProfile from '../../Sidebar/SidebarProfile';
+import UserLocation from '../Location/UserLocation';
 
 const UserDetails = () => {
   return (
@@ -25,6 +25,9 @@ const UserDetails = () => {
             Julicher Strabe 72a,
             <br /> 52070 Aachen, Germany
           </span>
+        </div>
+        <div className='office_location mb-2 mt-2'>
+          <UserLocation />
         </div>
       </div>
     </div>
