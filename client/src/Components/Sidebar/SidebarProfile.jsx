@@ -12,11 +12,9 @@ const SidebarProfile = () => {
         ></img>
         <div className='flex flex-col justify-start ml-3'>
           <span className='text-black font-semibold text-left block'>
-            Saurabh Mhaske
+            Richard Anthony
           </span>
-          <span className='text-black font-light text-left block'>
-            Front end dev
-          </span>
+          <span className='text-black font-light text-left block'>CTO</span>
         </div>
       </div>
     </div>
