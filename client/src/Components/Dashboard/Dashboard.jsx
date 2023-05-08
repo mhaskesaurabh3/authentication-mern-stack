@@ -41,8 +41,6 @@ const Dashboard = () => {
       .find((row) => row.startsWith('authToken='))
       ?.split('=')[1];
 
-    console.log(isAuthenticated);
-
     if (!isAuthenticated && !authToken) {
       navigate('/login');
     }

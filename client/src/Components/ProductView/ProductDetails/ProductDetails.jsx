@@ -1,8 +1,19 @@
 import React from 'react';
 import ProductPic from '../../../assets/product-pic.jpg';
 import Badge from '../../../assets/badge-icon.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../../redux/ProductSlice/ProductSlice';
+import { useEffect } from 'react';
 
 const ProductDetails = () => {
+  const productsData = useSelector((state) => console.log(state.products));
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+    console.log(productsData);
+  }, []);
+
   return (
     <div className='product_detail'>
       <div className='product_descrition relative'>
