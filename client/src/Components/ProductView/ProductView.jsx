@@ -1,4 +1,5 @@
 import React from 'react';
+import OfferDetails from '../OfferDetails/OfferDetails';
 import YoutubeEmbed from '../Pages/Video/YoutubeEmbed';
 import BreadCumb from './Breadcumb/BreadCumb';
 import ProductDetails from './ProductDetails/ProductDetails';
@@ -21,6 +22,10 @@ const ProductView = () => {
 
       <div className='youtube_video_embeded  ml-6 mt-5 rounded-tl-md h-96 bg-white	border border-br-light-grey '>
         <YoutubeEmbed embedId={'dQw4w9WgXcQ'} />
+      </div>
+
+      <div className='youtube_video_embeded  ml-6 mt-5 rounded-tl-md h-56 bg-white	border border-br-light-grey '>
+        <OfferDetails />
       </div>
     </div>
   );

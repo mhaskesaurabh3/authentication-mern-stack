@@ -9,7 +9,8 @@ export default {
         'nav-color': '#272E71',
         'side-bar-color': '#F9FAFB',
         'bg-light-blue': '#D3E3FD',
-        'br-light-grey':'#E5E7EBs'
+        'br-light-grey': '#E5E7EBs',
+        'new-grey': '#6B7280',
       },
     },
   },
