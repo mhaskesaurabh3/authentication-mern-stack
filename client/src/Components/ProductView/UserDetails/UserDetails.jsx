@@ -1,17 +1,24 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import InoLogo from '../../../assets/inno-Logo.svg';
 import Location from '../../../assets/inno_location.png';
 import SidebarProfile from '../../Sidebar/SidebarProfile';
 import UserLocation from '../Location/UserLocation';
 
 const UserDetails = () => {
+  const companyInfo = useSelector(
+    (state) => state.products?.productData?.company
+  );
+
+  const fullLocation = companyInfo?.street + ' ' + companyInfo?.house;
+
   return (
     <div>
       <div className='user_details ml-5'>
         <h3 className='text-left font-medium'>Offered By</h3>
         <img
-          src={InoLogo}
-          className='h-8 mr-3 bg-nav-color mt-2'
+          src={companyInfo?.logo}
+          className='h-8 mr-3 mt-2'
           alt='Innoloft logo'
         />
         <SidebarProfile />
