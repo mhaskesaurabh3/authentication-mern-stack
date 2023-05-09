@@ -14,6 +14,7 @@ export const fetchProducts = createAsyncThunk(
       'https://api-test.innoloft.com//product/6781/'
     );
     const data = await response.data;
+    console.log('Data', data);
     return data;
   }
 );

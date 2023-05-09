@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import OfferDetails from '../OfferDetails/OfferDetails';
 import YoutubeEmbed from '../Pages/Video/YoutubeEmbed';
 import BreadCumb from './Breadcumb/BreadCumb';
@@ -6,6 +7,21 @@ import ProductDetails from './ProductDetails/ProductDetails';
 import UserDetails from './UserDetails/UserDetails';
 
 const ProductView = () => {
+  const companyData = useSelector(
+    (state) => state.products?.productData?.video
+  );
+
+  let videoId = null;
+
+  if (companyData) {
+    try {
+      const searchParams = new URLSearchParams(new URL(companyData).search);
+      videoId = searchParams.get('v');
+    } catch (error) {
+      console.error(`Failed to parse video URL: ${error}`);
+    }
+  }
+
   return (
     <div>
       <div className='breadcumb'>
@@ -21,7 +37,7 @@ const ProductView = () => {
       </div>
 
       <div className='youtube_video_embeded  ml-6 mt-5 rounded-tl-md h-96 bg-white	border border-br-light-grey '>
-        <YoutubeEmbed embedId={'dQw4w9WgXcQ'} />
+        <YoutubeEmbed embedId={videoId} />
       </div>
 
       <div className='youtube_video_embeded  ml-6 mt-5 rounded-tl-md h-56 bg-white	border border-br-light-grey '>

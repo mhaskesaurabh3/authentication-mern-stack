@@ -7,7 +7,8 @@ const YoutubeEmbed = ({ embedId }) => (
     <div className='youtube_video flex justify-center'>
       <iframe
         className='!w-3/4 mt-5  '
-        width='500px'
+        // width='500px'
+        height='300px'
         src={`https://www.youtube.com/embed/${embedId}`}
         frameBorder='0'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
