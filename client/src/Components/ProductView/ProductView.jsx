@@ -17,6 +17,7 @@ const ProductView = () => {
     try {
       const searchParams = new URLSearchParams(new URL(companyData).search);
       videoId = searchParams.get('v');
+      console.log(searchParams); // Outputs the searchParams object to the console
     } catch (error) {
       console.error(`Failed to parse video URL: ${error}`);
     }
