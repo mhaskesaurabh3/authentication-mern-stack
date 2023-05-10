@@ -3,9 +3,11 @@ import userPic from '../../assets/user.jpg';
 import InoLogo from '../../assets/inno-Logo.svg';
 import { Link } from 'react-router-dom';
 import SidebarProfile from '../Sidebar/SidebarProfile';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [showDrowdown, setShowDropwdown] = useState(false);
+  const profileData = useSelector((state) => state.products?.productData?.user);
 
   return (
     <div className='block'>
@@ -34,7 +36,7 @@ const Navbar = () => {
             >
               <img
                 className='w-full h-full object-cover'
-                src={userPic}
+                src={profileData?.profilePicture}
                 alt='user-pic'
               />
             </button>
@@ -48,11 +50,12 @@ const Navbar = () => {
 
             {showDrowdown ? (
               <div className='absolute right-0 bg-white rounded-lg w-48 py-2 shadow-lg text-left'>
-                <Link to='/login'>
-                  <a className='block px-4 py-2 text-gray-800 hover:bg-nav-color hover:text-white'>
-                    Profile
-                  </a>
-                </Link>
+                <a
+                  href='#'
+                  className='block px-4 py-2 text-gray-800 hover:bg-nav-color hover:text-white'
+                >
+                  Profile
+                </a>
                 <a
                   href='#'
                   className='block px-4 py-2 text-gray-800  hover:bg-nav-color hover:text-white'

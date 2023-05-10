@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BreadCumb = () => {
   return (
-    <div className='flex ml-6'>
+    <div className='flex ml-6 justify-between'>
       <nav className='mt-6' aria-label='Breadcrumb'>
         <ol className='inline-flex items-center space-x-1 md:space-x-3'>
           <li className='inline-flex items-center'>
@@ -66,6 +67,11 @@ const BreadCumb = () => {
           </li>
         </ol>
       </nav>
+      <Link to='/product/edit'>
+        <button className='bg-nav-color text-white mt-3 mr-2 px-4 py-2'>
+          Edit
+        </button>
+      </Link>
     </div>
   );
 };
