@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <div className='block'>
-      <nav className='bg-nav-color w-screen top-0 z-50 border-gray-200 dark:bg-gray-900 h-16 '>
+      <nav className='bg-nav-color  top-0 z-50 border-gray-200 dark:bg-gray-900 h-16 '>
         <div className='max-w-screen-xl flex justify-between flex-wrap items-start w-full  mx-auto p-4'>
           <a href='#' className='flex items-center'>
             <img src={InoLogo} className='h-8 mr-3' alt='Innoloft logo' />
